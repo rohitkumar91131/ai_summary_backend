@@ -1,17 +1,23 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import Articles from './controller/Article.js'; 
+import ArticleRoutes from './controller/Article.js'; 
+import UserRoutes from './controller/User.js';  
+import cookieParser from "cookie-parser";
 dotenv.config();
 
 import './config/db.js';
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: process.env.CLIENT_URL || 'http://localhost:3000',
+    credentials : true,
+}));
 app.use(express.json());
+app.use(cookieParser());
 
-app.use('/article', Articles);
-
+app.use('/article', ArticleRoutes);
+app.use('/auth', UserRoutes);
 app.get('/', (req, res) => {
     res.json({ message: 'Hello from AI Text Summariser backend' });
 });
