@@ -16,8 +16,8 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-app.use('/article', ArticleRoutes);
-app.use('/auth', UserRoutes);
+app.use('/api/article', ArticleRoutes);
+app.use('/api/auth', UserRoutes);
 app.get('/', (req, res) => {
     res.json({ message: 'Hello from AI Text Summariser backend' });
 });
